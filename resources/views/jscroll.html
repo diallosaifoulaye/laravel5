@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="infinite-scroll">
+
+</div>
+
+<script src="{{assets('/js/jscroll.js')}}"></script>
+<script type="text/javascript">
+    $('ul.pagination').hide();
+    $(function() {
+        $('.infinite-scroll').jscroll({
+            autoTrigger: true,
+            loadingHtml: '<img class="center-block" src="https://ayssacars.com/dashbord/img/myload.gif" alt="Loading..." />',
+            padding: 0,
+            nextSelector: '.pagination li.active + li a',
+            contentSelector: 'div.infinite-scroll',
+            callback: function() {
+                $('ul.pagination').remove();
+            }
+        });
+    });
+</script>
+<script>
+    function modalopen() {
+        $.get('{{url('user/create')}}').done(function (d) {
+            alert(d)
+            $("#contentmodal").html(d);
+            $("#modalgeneric").modal("show");
+        })
+    }
+</script>
+</body>
+</html>
